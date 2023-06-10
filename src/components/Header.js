@@ -1,17 +1,15 @@
-
-
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-
-
     return (
         <header className="header">
             <div className="header__logo">
                 <h1>Fripperie Mini</h1>
-                {/* <img src="/images/logo.png" alt="logo" /> */}
             </div>
+            <input type="checkbox" id="hamburger" />
+            <label htmlFor="hamburger" className="header__nav__hamburger">
+                ☰
+            </label>
             <nav className="header__nav">
                 <ul>
                     <li>
@@ -31,14 +29,8 @@ const Header = () => {
                     </li>
                 </ul>
             </nav>
-
-
         </header>
-
-
     )
 }
 
-
-
-export default Header
+export default Header;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Button from './Button';
 
 const EditItemForm = ({ item, handleUpdateItem, handleCloseModal }) => {
     const [formState, setFormState] = useState(item);
@@ -21,7 +22,7 @@ const EditItemForm = ({ item, handleUpdateItem, handleCloseModal }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='add-form'>
             <input
                 type="text"
                 name="name"
@@ -52,7 +53,11 @@ const EditItemForm = ({ item, handleUpdateItem, handleCloseModal }) => {
                 value={formState.image}
                 onChange={handleChange}
             />
-            <button type="submit">Submit</button>
+            <Button
+                // onClick={handleClick}
+                className='add-form-btn'
+                text='Envoyer'
+            />
         </form>
     );
 };

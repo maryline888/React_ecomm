@@ -3,16 +3,17 @@ import Modal from 'react-modal';
 import SearchForm from './SearchForm';
 import AddItemForm from './AddItemForm';
 import EditItemForm from './EditItemForm';
+import Button from './Button';
 
 Modal.setAppElement('#root');
 
 const products = [
-    { id: 1, name: 'Robe', description: 'grandeur 12 mois', price: '10$', category: 'Bébé', image: './img/robe.jpg' },
-    { id: 2, name: 'Soulier', description: 'Bébé 9 mois en très bonne état', price: '30$', category: 'Bébé', image: './img/soulier.jpg' },
-    { id: 3, name: 'kit vert', description: 'short et t-shirt', price: '20$', category: 'Jeunes enfants', image: './img/vetement.jpg' },
-    { id: 4, name: 'Pantalon', description: 'pantalon style cargo 4 ans', price: '10$', category: 'Jeunes enfants', image: './img/jeans.jpg' },
-    { id: 5, name: 'Habit de neige', description: 'porté 1 hiver, grandeur 6 ans marque Deux par Deux', price: '50$', category: 'Hiver', image: './img/habitneige.jpg' },
-    { id: 6, name: 'Pijama Fox', description: 'petit pijama pour bébé nouveau né grandeur 0-3 mois', price: '10$', category: 'Bébé', image: './img/newborn.jpg' },
+    { id: 1, name: 'Robe', description: 'grandeur 12 mois', price: '10$', category: 'Bébé', image: '/img/robe.jpg' },
+    { id: 2, name: 'Soulier', description: 'Bébé 9 mois en très bonne état', price: '30$', category: 'Bébé', image: '/img/soulier.jpg' },
+    { id: 3, name: 'kit vert', description: 'short et t-shirt', price: '20$', category: 'Jeunes enfants', image: '/img/vetement.jpg' },
+    { id: 4, name: 'Pantalon', description: 'pantalon style cargo 4 ans', price: '10$', category: 'Jeunes enfants', image: '/img/jeans.jpg' },
+    { id: 5, name: 'Habit de neige', description: 'porté 1 hiver, grandeur 6 ans marque Deux par Deux', price: '50$', category: 'Hiver', image: '/img/habitneige.jpg' },
+    { id: 6, name: 'Pijama Fox', description: 'petit pijama pour bébé nouveau né grandeur 0-3 mois', price: '10$', category: 'Bébé', image: '/img/newborn.jpg' },
 ];
 
 const Shop = () => {
@@ -64,9 +65,12 @@ const Shop = () => {
         <section>
             <div className="shop-header">
                 <h2>Mettre en ligne un item</h2>
-                <button onClick={toggleAddItemForm}>
-                    {isAdding ? 'Fermer le formulaire' : 'Ajouter un nouvel item'}
-                </button>
+
+                <Button
+                    onClick={toggleAddItemForm}
+                    className='add-form-btn'
+                    text='Ajouter'
+                />
                 <Modal
                     isOpen={isAdding}
                     onRequestClose={toggleAddItemForm}
@@ -74,8 +78,8 @@ const Shop = () => {
                     className="modal"
                     overlayClassName="overlay"
                 >
-                    <AddItemForm addItemToList={addItemToList} />
-                </Modal>
+                    <button onClick={toggleAddItemForm} className="close-modal-btn">X</button>
+                    <AddItemForm addItemToList={addItemToList} />                </Modal>
                 <Modal
                     isOpen={isEditing}
                     onRequestClose={handleCloseModal}
@@ -91,18 +95,28 @@ const Shop = () => {
                         />
                     )}
                 </Modal>
-                <SearchForm />
             </div>
+            <SearchForm />
             <div className="shop-container">
                 {itemList.map((item) => (
                     <div className="card" key={item.id}>
-                        <img src={item.image} alt={item.name} className="card-img" />
+                        <img src={process.env.PUBLIC_URL + item.image} alt={item.name} className="card-img" />
                         <h2>{item.name}</h2>
                         <p>{item.description}</p>
                         <p>{item.price}</p>
                         <p><strong>Catégorie : </strong>{item.category}</p>
-                        <button onClick={() => handleEditItem(item.id)}>Modifier</button>
-                        <button onClick={() => handleDeleteItem(item.id)}>Supprimer</button>
+                        <div className='card-btns'>
+                            <Button
+                                onClick={() => handleEditItem(item.id)}
+                                className='btn '
+                                text='Modifier'
+                            />
+                            <Button
+                                onClick={() => handleDeleteItem(item.id)}
+                                className='btn btn-red'
+                                text='Supprimer'
+                            />
+                        </div>
                     </div>
                 ))}
             </div>

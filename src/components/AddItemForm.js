@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from './Button';
 
 const AddItemForm = (props) => {
     const [item, setItem] = useState({
@@ -9,6 +10,8 @@ const AddItemForm = (props) => {
         category: '',
         image: null
     });
+
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -41,11 +44,17 @@ const AddItemForm = (props) => {
             category: '',
             image: null
         });
+
+        setSuccessMessage('Votre item a bien été ajouté !');
+        setTimeout(() => {
+            setSuccessMessage('');
+        }, 3000);
     };
 
     return (
         <section>
-            <form onSubmit={handleSubmit}>
+            {successMessage && <div className="success-message">{successMessage}</div>}
+            <form onSubmit={handleSubmit} className='add-form'>
                 <h1>Que voulez-vous mettre en vente ?</h1>
                 <label>
                     <input type="text" name="name" placeholder="Titre de l'item" value={item.name} onChange={handleChange} />
@@ -63,9 +72,11 @@ const AddItemForm = (props) => {
                     <span>Veuillez choisir une image</span>
                     <input type="file" name="image" onChange={handleImageChange} />
                 </label>
-                <button type="submit">Ajouter</button>
+                <Button
+                    className='add-form-btn'
+                    text='Envoyer'
+                />
             </form>
-
         </section>
     );
 };

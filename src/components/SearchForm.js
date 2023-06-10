@@ -9,7 +9,6 @@ const SearchForm = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        // Effectuez votre recherche ici en utilisant `searchTerm`
         console.log(`Effectuez une recherche pour "${searchTerm}"`);
     };
 
