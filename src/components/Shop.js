@@ -7,16 +7,9 @@ import Button from './Button';
 
 Modal.setAppElement('#root');
 
-const products = [
-    { id: 1, name: 'Robe', description: 'grandeur 12 mois', price: '10$', category: 'Bébé', image: '/img/robe.jpg' },
-    { id: 2, name: 'Soulier', description: 'Bébé 9 mois en très bonne état', price: '30$', category: 'Bébé', image: '/img/soulier.jpg' },
-    { id: 3, name: 'kit vert', description: 'short et t-shirt', price: '20$', category: 'Jeunes enfants', image: '/img/vetement.jpg' },
-    { id: 4, name: 'Pantalon', description: 'pantalon style cargo 4 ans', price: '10$', category: 'Jeunes enfants', image: '/img/jeans.jpg' },
-    { id: 5, name: 'Habit de neige', description: 'porté 1 hiver, grandeur 6 ans marque Deux par Deux', price: '50$', category: 'Hiver', image: '/img/habitneige.jpg' },
-    { id: 6, name: 'Pijama Fox', description: 'petit pijama pour bébé nouveau né grandeur 0-3 mois', price: '10$', category: 'Bébé', image: '/img/newborn.jpg' },
-];
 
-const Shop = () => {
+
+const Shop = ({ products }) => {
     const [itemList, setItemList] = useState(products);
     const [isEditing, setIsEditing] = useState(false);
     const [editItem, setEditItem] = useState(null);
@@ -64,12 +57,11 @@ const Shop = () => {
     return (
         <section>
             <div className="shop-header">
-                <h2>Mettre en ligne un item</h2>
 
                 <Button
                     onClick={toggleAddItemForm}
                     className='add-form-btn'
-                    text='Ajouter'
+                    text='Mettre en ligne un item'
                 />
                 <Modal
                     isOpen={isAdding}
